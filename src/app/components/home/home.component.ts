@@ -9,6 +9,7 @@ import { SpotifyService } from '../../services/spotify.service';
 })
 export class HomeComponent implements OnInit {
   nuevasCanciones: any[] = [];
+  loading: boolean;
   // // consumiendo api
   // url = 'https://restcountries.eu/rest/v2/lang/es';
   // paises: any[] = [];
@@ -33,7 +34,12 @@ constructor(private spotify: SpotifyService) {
     // se remondable centralizar todo el codigo haciendo un service
     // comando service ng g s services/spotify
     // llamamos una funcion creada que obtiene la data
-    this.spotify.getNewReleases().subscribe((response: any) => this.nuevasCanciones = response);
+    this.loading = true;
+    this.spotify.getNewReleases().subscribe((response: any) => {
+      this.nuevasCanciones = response;
+      this.loading = false;
+      console.log(response);
+    });
    }
   ngOnInit() {
   }
