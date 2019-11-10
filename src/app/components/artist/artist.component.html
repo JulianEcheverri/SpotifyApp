@@ -32,9 +32,10 @@
                     <td>{{item.album.name}}</td>
                     <td>{{item.name}}</td>
                     <td>
-                        <audio [src]="item.preview_url" controls>
+                        <!-- <audio [src]="item.preview_url" controls>
 
-                        </audio>
+                        </audio> -->
+                        <iframe [src]="item.uri | domseguro:'https://open.spotify.com/embed?uri='" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     </td>
                 </tr>
             </tbody>

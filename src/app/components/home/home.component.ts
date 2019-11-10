@@ -10,6 +10,8 @@ import { SpotifyService } from '../../services/spotify.service';
 export class HomeComponent implements OnInit {
   nuevasCanciones: any[] = [];
   loading: boolean;
+  error: boolean;
+  mensajeDeError = "";
   // // consumiendo api
   // url = 'https://restcountries.eu/rest/v2/lang/es';
   // paises: any[] = [];
@@ -35,10 +37,17 @@ constructor(private spotify: SpotifyService) {
     // comando service ng g s services/spotify
     // llamamos una funcion creada que obtiene la data
     this.loading = true;
+    this.error = false;
+    // para manejo de erroes usamos la funcion de error del observador subscribe rxjs
     this.spotify.getNewReleases().subscribe((response: any) => {
       this.nuevasCanciones = response;
       this.loading = false;
       console.log(response);
+    }, (errorService) =>{
+      console.log(errorService.error.error.message);
+      this.error = true;
+      this.loading = false;
+      this.mensajeDeError = errorService.error.error.message;
     });
    }
   ngOnInit() {
