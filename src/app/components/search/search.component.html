@@ -1,1 +1,6 @@
-<p>search works!</p>
+<div class="row">
+    <div class="col">
+        <input #termino type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="Buscar artista">
+    </div>
+</div>
+<app-card [items]="artistas"></app-card>
